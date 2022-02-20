@@ -1,0 +1,2 @@
+# plantScheduler
+Plant Scheduler - Tauri
