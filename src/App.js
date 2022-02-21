@@ -11,6 +11,7 @@ import Nutrients from './Pages/Data/Nutrients';
 import Tents from './Pages/Data/Tents';
 import Events from './Pages/Events_Methods/Events';
 import Methods from './Pages/Events_Methods/Methods';
+import ServerInfo from './Pages/Testing/ServerInfo';
 function App() {
   return (
     <AppShell
@@ -30,6 +31,7 @@ function App() {
         <Route path="/tents" element={<Tents />} />
         <Route path="/events" element={<Events />} />
         <Route path="/methods" element={<Methods />} />
+        <Route path="/server-info" element={<ServerInfo />} />
       </Routes>
     </AppShell>
   )

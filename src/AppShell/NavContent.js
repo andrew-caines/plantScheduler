@@ -1,8 +1,8 @@
-import { ActionIcon, Button, Group, Navbar, Text } from '@mantine/core';
+import { Button, Group, Navbar, Text } from '@mantine/core';
 import { useNotifications } from '@mantine/notifications';
-import { Activity, Bottle, CalendarEvent, CalendarPlus, CheckupList, Notification, Plant2, Plus, Replace, Tent, List, Stack } from 'tabler-icons-react';
+import { Bottle, CalendarEvent, CalendarPlus, CheckupList, ListDetails, Plant2, Plus, Replace, Tent, Message, Stack } from 'tabler-icons-react';
 import { Link } from 'react-router-dom';
-
+import { invoke } from '@tauri-apps/api/tauri';
 export default function NavContent(props) {
     const notifications = useNotifications();
 
@@ -79,15 +79,52 @@ export default function NavContent(props) {
             <Navbar.Section>
                 <Text size="xs">Testing</Text>
                 <Group>
-                    <Notification />
+                    <ListDetails />
+                    <Button
+                        component={Link}
+                        to="/server-info"
+                        variant="white"
+
+                    >
+                        Server Details
+                    </Button>
+                </Group>
+                <Group>
+                    <Message />
                     <Button
                         variant="white"
-                        onClick={() => notifications.showNotification({
-                            title: "Test Notification",
-                            message: "This is a test notification!",
-                            autoClose: 2000
-                        })}>
-                        Click Notification test
+                        onClick={() => {
+                            invoke('test_message')
+                        }}
+                    >
+                        API message test
+                    </Button>
+                </Group>
+                <Group>
+                    <Message />
+                    <Button
+                        variant="white"
+                        onClick={() => {
+                            invoke('echo_message', { message: `From frontend @ ${new Date().toLocaleTimeString('en-us')}` });
+                        }}
+                    >
+                        API with payload
+                    </Button>
+                </Group>
+                <Group>
+                    <Message />
+                    <Button
+                        variant="white"
+                        onClick={async () => {
+                            let server_message = await invoke('message_from_server');
+                            notifications.showNotification({
+                                title: `From Server`,
+                                message: `${server_message}`,
+                                autoClose: 5000
+                            })
+                        }}
+                    >
+                        From Server
                     </Button>
                 </Group>
             </Navbar.Section>
