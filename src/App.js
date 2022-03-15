@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom';
-import { AppShell, Header } from '@mantine/core';
+import { AppShell } from '@mantine/core';
 import NavContent from './AppShell/NavContent';
 import HeaderContent from './AppShell/HeaderContent';
 import LandingPage from './Pages/LandingPage';
